@@ -1,2 +1,2 @@
-# challenge_survey
+# Challenge Survey Tool
 Survey Tool Coding Challenge
