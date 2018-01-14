@@ -5,7 +5,7 @@
         <h1 class="s-question">${options.question}</h1>
         <div class="s-answers-container"></div>
         <label for="s-answer-other">Other:</label>
-        <input id="s-answer-other"/>
+        <input id="s-answer-other" name="other_answer"/>
         <button id="s-submit" type="submit">Submit</button>
         <p class="s-error"></p>
       </form>`;
@@ -19,7 +19,7 @@
        `<div class="s-option">
           <div class="s-value">${answer}</div>
           <div class="s-indicator"></div>
-          <input type="text"/>
+          <input type="text" name="answers"/>
         </div>`;
       });
       return block;
@@ -43,7 +43,7 @@
 
     function submitEvent() {
       $("#s-submit").click(function(event) {
-        if (selected === 0 && !$("#s-answer-other").val()) {
+        if (selected === 0) {
           event.preventDefault();
           $(".s-error").text("Survey incomplete. Please select at least one option.");
         }
