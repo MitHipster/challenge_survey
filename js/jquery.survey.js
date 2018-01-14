@@ -47,17 +47,17 @@
           event.preventDefault();
           $(".s-error").text("Survey incomplete. Please select at least one option.");
         } else {
-          let optionsSel = ""
-          indicator = $(indicator);
-          input = $(input);
-          $.each(indicator, function(index, element) {
-            element = $(element);
-            if (element.attr("data-selected") === "true") {
-              optionsSel += element.attr("data-value") + ", ";
+          let optionsSel = "";
+          const $indicator = $(indicator);
+          const $input = $(input);
+          $.each($indicator, function(index, element) {
+            $element = $(element);
+            if ($element.attr("data-selected") === "true") {
+              optionsSel += $element.attr("data-value") + ", ";
             }
           });
           optionsSel = optionsSel.substring(0, optionsSel.length - 2);
-          input.val(optionsSel);
+          $input.val(optionsSel);
         }
       });
     }
