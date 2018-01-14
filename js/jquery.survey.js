@@ -8,7 +8,7 @@
         </div>
         <label for="s-answer-other">Other:</label>
         <input id="s-answer-other" name="other_answer"/>
-        <button id="s-submit" type="submit">Submit</button>
+        <button id="s-submit" type="submit" disabled>Submit</button>
         <p class="s-error"></p>
       </form>`;
 
@@ -28,43 +28,43 @@
 
     let selected = 0;
 
-    function answerEvent(parent, indicator) {
+    function answerEvent(parent, indicator, button) {
       $(parent).click(function() {
         const $indicator = $(this).children(indicator);
+        const $button = $(button);
         if (!$indicator.attr("data-selected")) {
-          $indicator.attr("data-selected", "true")
           selected++;
+          $indicator.attr("data-selected", "true");
+          $button.prop('disabled', false);
         } else {
-          $indicator.attr("data-selected", "")
           selected--;
+          $indicator.attr("data-selected", "");
+          if (selected === 0) {
+            $button.prop('disabled', true);
+          }
         }
       });
     }
 
     function submitEvent(button, indicator, input) {
       $(button).click(function(event) {
-        if (selected === 0) {
-          event.preventDefault();
-          $(".s-error").text("Survey incomplete. Please select at least one option.");
-        } else {
-          let optionsSel = "";
-          const $indicator = $(indicator);
-          const $input = $(input);
-          $.each($indicator, function(index, element) {
-            $element = $(element);
-            if ($element.attr("data-selected") === "true") {
-              optionsSel += $element.attr("data-value") + ", ";
-            }
-          });
-          optionsSel = optionsSel.substring(0, optionsSel.length - 2);
-          $input.val(optionsSel);
-        }
+        let optionsSel = "";
+        const $indicator = $(indicator);
+        const $input = $(input);
+        $.each($indicator, function(index, element) {
+          $element = $(element);
+          if ($element.attr("data-selected") === "true") {
+            optionsSel += $element.attr("data-value") + ", ";
+          }
+        });
+        optionsSel = optionsSel.substring(0, optionsSel.length - 2);
+        $input.val(optionsSel);
       });
     }
 
     $(this).append(form);
     $(this).find(".s-answers-container").prepend(surveryAnswers);
-    answerEvent(".s-option", ".s-indicator");
+    answerEvent(".s-option", ".s-indicator", "#s-submit");
     submitEvent("#s-submit", ".s-indicator", "#s-answers");
     return $(this);
   }
