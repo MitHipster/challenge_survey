@@ -1,46 +1,59 @@
 (function($) {
   $.fn.renderSurvey = function(options) {
-    let form =
+    const form =
      `<form id="s-form" action=${options.submitUrl} method="GET">
         <h1 class="s-question">${options.question}</h1>
         <div class="s-answers-container"></div>
-      </form>
-      <label for="s-answer-other">Other:</label>
-      <input id="s-answer-other"/>`;
+        <label for="s-answer-other">Other:</label>
+        <input id="s-answer-other"/>
+        <button id="s-submit" type="submit">Submit</button>
+        <p class="s-error"></p>
+      </form>`;
 
-    let surveryAnswers = renderAnswers(options.answers);
+    const surveryAnswers = renderAnswers(options.answers);
 
     function renderAnswers(answers) {
       let block = ``;
       $.each(answers, function(index, answer) {
         block +=
-       `<div class="s-answer">${answer}
+       `<div class="s-option">
+          <div class="s-value">${answer}</div>
+          <div class="s-indicator"></div>
           <input type="text"/>
         </div>`;
       });
-
       return block;
     };
 
-    function assignEvent(className) {
+    let selected = 0;
+
+    function answerEvent(className) {
       $(className).click(function() {
-        let $input = $(this).children("input");
+        const $input = $(this).children("input");
         if (!$input.val()) {
-          let answerValue = $(this).text();
-          $input.val(answerValue);
+          let optionValue = $(this).first().text().trim();
+          $input.val(optionValue);
+          selected++;
         } else {
           $input.val("");
+          selected--;
+        }
+      });
+    }
+
+    function submitEvent() {
+      $("#s-submit").click(function(event) {
+        if (selected === 0 && !$("#s-answer-other").val()) {
+          event.preventDefault();
+          $(".s-error").text("Survey incomplete. Please select at least one option.");
         }
       })
     }
 
-    // function renderHiddenInputs(answers) {
-    //
-    // }
-
     $(this).append(form);
     $(this).find(".s-answers-container").append(surveryAnswers);
-    assignEvent(".s-answer");
+    answerEvent(".s-option");
+    submitEvent();
     return $(this);
   }
 }(jQuery));

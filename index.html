@@ -15,11 +15,12 @@
   crossorigin="anonymous"></script>
   <script src="js/jquery.survey.js"></script>
   <script type="text/javascript">
-    $("#survey").renderSurvey({
+    const surveyConfig = {
       "question": "What is your favorite color?",
       "answers": ["Red", "Green", "Blue", "Orange"],
       "submitUrl": "https://example.com/"
-    });
+    };
+    $("#survey").renderSurvey(surveyConfig);
   </script>
 </body>
 </html>
