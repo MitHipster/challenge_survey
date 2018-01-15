@@ -64,10 +64,10 @@
       });
     }
 
-    $(this).append(form);
-    $(this).find(".s-answers-container").prepend(surveryAnswers);
+    this.append(form);
+    this.find(".s-answers-container").prepend(surveryAnswers);
     answerEvent(".s-option", ".s-indicator", "#s-submit");
     submitEvent("#s-submit", ".s-indicator", "#s-answers");
-    return $(this);
+    return this;
   }
 }(jQuery));
