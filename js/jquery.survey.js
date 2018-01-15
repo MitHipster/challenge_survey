@@ -4,10 +4,12 @@
      `<form id="s-form" action=${options.submitUrl} method="GET">
         <h1 class="s-question">${options.question}</h1>
         <div class="s-answers-container">
-          <input id="s-answers" type="text" name="answers"/>
+          <input id="s-answers" type="hidden" name="answers"/>
         </div>
-        <label for="s-answer-other">Other:</label>
-        <input id="s-answer-other" name="other_answer"/>
+        <div class="s-other-container">
+          <label for="s-answer-other">Other:</label>
+          <input id="s-answer-other" name="other_answer"/>
+        </div>
         <button id="s-submit" type="submit" disabled>Submit</button>
         <p class="s-error"></p>
       </form>`;
