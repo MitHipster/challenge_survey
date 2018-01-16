@@ -1,11 +1,11 @@
 # Challenge Survey Tool
 Survey Tool Coding Challenge
 
-[GitHub page](https://mithipster.github.io/challenge_survey/)
+[GitHub Page](https://mithipster.github.io/challenge_survey/)
 
 A simple survey tool that allows users to provide feedback.
 
-This tool reads questions and answers from a JSON object:
+This tool reads questions and answers from a JSON object...
 
 ```javascript
 {
@@ -15,11 +15,11 @@ This tool reads questions and answers from a JSON object:
 }
 ```
 
-And renders the following form:
+and then renders the following form:
 
 ![Screenshot](img/screenshot.png)
 
-Your can invoked this library like so:
+You can invoked this library like so:
 
 `
 $(‘.surveyContainer’).renderSurvey(jsonObject);
